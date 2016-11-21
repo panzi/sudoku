@@ -4,3 +4,5 @@ sudoku
 .*
 *.swp
 *~
+perf.data
+perf.data.old
