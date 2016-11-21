@@ -1,0 +1,6 @@
+sudoku
+*.o
+*.txt
+.*
+*.swp
+*~
