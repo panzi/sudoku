@@ -139,12 +139,15 @@ def solve(sudoku):
 	yield from try_next(0, 0)
 
 def main(args):
-	with open(args[0], 'r') as stream:
-		sudoku = read_sudoku(stream)
+	if args:
+		with open(args[0], 'r') as stream:
+			sudoku = read_sudoku(stream)
+	else:
+		sudoku = read_sudoku(sys.stdin)
 
 	for solution in solve(sudoku):
 		write_sudoku(solution, sys.stdout)
 		print('\n')
 
 if __name__ == '__main__':
-	main(sys.argv[1:])	
+	main(sys.argv[1:])
