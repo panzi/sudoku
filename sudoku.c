@@ -27,7 +27,6 @@ static void read_sudoku(FILE *stream, Sudoku *sudoku);
 static void write_sudoku(FILE *stream, const Sudoku *sudoku);
 static void solve(const Sudoku *sudoku, void (*callback)(const Sudoku *));
 static void try_next(Solver *solver, size_t x, size_t y);
-static void print_solutions(FILE *stream);
 static void print_solution(const Sudoku *solution);
 
 void read_sudoku(FILE *stream, Sudoku *sudoku) {
@@ -229,15 +228,11 @@ void print_solution(const Sudoku *solution) {
 	fputc('\n', stdout);
 }
 
-void print_solutions(FILE *stream) {
-	Sudoku sudoku = { .numbers = { { 0 } } };
-	read_sudoku(stream, &sudoku);
-	solve(&sudoku, print_solution);
-}
-
 int main(int argc, char *argv[]) {
+	Sudoku sudoku = { .numbers = { { 0 } } };
+
 	if (argc < 2) {
-		print_solutions(stdin);
+		read_sudoku(stdin, &sudoku);
 	}
 	else {
 		FILE *stream = fopen(argv[1], "r");
@@ -246,7 +241,9 @@ int main(int argc, char *argv[]) {
 			panice(argv[1]);
 		}
 
-		print_solutions(stream);
+		read_sudoku(stream, &sudoku);
 		fclose(stream);
 	}
+
+	solve(&sudoku, print_solution);
 }
