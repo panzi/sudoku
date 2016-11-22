@@ -5,6 +5,9 @@ A very simple sudoku solver written in Python and C. The Python
 implementation is really fast enough, but just for the heck of it I also
 implemented it in C.
 
+This sudoku solver prints every possible solution to a sudoku puzzle, not
+just the first one it finds.
+
 Usage
 -----
 
